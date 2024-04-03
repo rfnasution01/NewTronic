@@ -56,14 +56,19 @@ export default function MainLayout() {
       </div>
       <DialogHelpers
         title={
-          <div className="flex items-center gap-x-8 px-48 py-32 shadow-md">
-            <img src="/img/logo.png" alt="CoIndo" width={36} height={36} />
-            <h5 className="font-roboto text-[2.4rem]">New Tronic</h5>
+          <div className="flex items-center gap-x-8 px-48 py-32 shadow-md phones:bg-dark-background phones:text-white">
+            <img
+              src="https://newtronic-solution.com/wp-content/uploads/2023/10/Main-Logo.png"
+              alt="New Tronic"
+              width={90}
+              height={54}
+            />
           </div>
         }
         open={isOpen}
         setOpen={setIsOpen}
         noPadding
+        isBgDark
         customComponent={
           <div className="flex flex-col gap-y-48">
             <AsideContent show onClose={() => setIsOpen(false)} />
