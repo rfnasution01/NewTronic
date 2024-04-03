@@ -5,6 +5,8 @@ import { Outlet } from 'react-router-dom'
 import { AsideContent, AsideHeader } from './features/layout'
 import { useState } from 'react'
 import { DialogHelpers } from './components/ui/dialog'
+import { Breadcrumb } from './components/Breadcrumb'
+import { HeaderOptional } from './features/layout/headerOptional'
 
 export default function MainLayout() {
   const mode = useSelector(getModeSlice)
@@ -37,7 +39,7 @@ export default function MainLayout() {
           <header className="hidden phones:block">
             <AsideHeader show handleOpen={() => setIsOpen(true)} />
           </header>
-          {/* <div
+          <div
             className={clsx(
               'flex flex-row items-center justify-between px-48 py-16 shadow-md phones:hidden',
               {
@@ -47,13 +49,8 @@ export default function MainLayout() {
             )}
           >
             <Breadcrumb />
-            <OptionalNavigation
-              isOpenCalculator={isOpenCalculator}
-              setIsOpenCalculator={setIsOpenCalculator}
-              isOpenCurrency={isOpenCurrency}
-              setIsOpenCurrency={setIsOpenCurrency}
-            />
-          </div> */}
+            <HeaderOptional />
+          </div>
           <Outlet />
         </article>
       </div>
@@ -67,7 +64,12 @@ export default function MainLayout() {
         open={isOpen}
         setOpen={setIsOpen}
         noPadding
-        customComponent={<AsideContent show onClose={() => setIsOpen(false)} />}
+        customComponent={
+          <div className="flex flex-col gap-y-48">
+            <AsideContent show onClose={() => setIsOpen(false)} />
+            <HeaderOptional onClose={() => setIsOpen(false)} />
+          </div>
+        }
       />
     </section>
   )
