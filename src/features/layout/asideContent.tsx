@@ -1,9 +1,15 @@
 import { ListNavigationMain } from '@/libs/consts/dummy'
-import { usePathname } from '@/libs/usePathname'
+import { usePathname } from '@/libs/hooks/usePathname'
 import clsx from 'clsx'
 import { Link } from 'react-router-dom'
 
-export function AsideContent({ show }: { show?: boolean }) {
+export function AsideContent({
+  show,
+  onClose,
+}: {
+  show?: boolean
+  onClose?: () => void
+}) {
   const { firstPathname } = usePathname()
 
   const isPathnameOpen = (name: string) => {
@@ -35,6 +41,7 @@ export function AsideContent({ show }: { show?: boolean }) {
             },
           )}
           key={idx}
+          onClick={onClose}
         >
           <span className="">{item?.icon}</span>
           {show && <h5 className="font-roboto text-[2rem]">{item?.name}</h5>}

@@ -1,20 +1,28 @@
+import { getModeSlice } from '@/store/reducer/stateMode'
 import clsx from 'clsx'
 import { List } from 'lucide-react'
-import { Dispatch, SetStateAction } from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 export function AsideHeader({
   show,
-  setShow,
+  handleShow,
+  handleOpen,
 }: {
-  show: boolean
-  setShow: Dispatch<SetStateAction<boolean>>
+  show?: boolean
+  handleShow?: () => void
+  handleOpen?: () => void
 }) {
+  const mode = useSelector(getModeSlice)
+
   return (
     <div
       className={clsx('flex transition-all duration-300 hover:cursor-pointer', {
-        'flex-row items-center justify-between gap-x-32': show,
+        'flex-row items-center justify-between gap-x-32 phones:gap-x-16 phones:px-48 phones:py-32 phones:shadow-lg':
+          show,
         'flex-col-reverse items-center gap-y-16': !show,
+        'phones:bg-light-background phones:text-black': mode.isLight,
+        'phones:bg-dark-background phones:text-white': !mode?.isLight,
       })}
     >
       {show && (
@@ -26,7 +34,7 @@ export function AsideHeader({
           <h5>New Tronic</h5>
         </Link>
       )}
-      <span onClick={() => setShow(!show)}>
+      <span onClick={handleShow || handleOpen}>
         <List />
       </span>
     </div>
