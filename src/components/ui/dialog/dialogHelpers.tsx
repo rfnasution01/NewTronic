@@ -18,12 +18,14 @@ export function DialogHelpers({
   customComponent,
   noPadding,
   size,
+  isBgDark,
 }: {
   open: boolean
   setOpen: Dispatch<SetStateAction<boolean>>
   title: string | ReactNode
   customComponent?: ReactNode
   noPadding?: boolean
+  isBgDark?: boolean
   size?: 'full' | 'large' | 'medium' | 'small'
 }) {
   const mode = useSelector(getModeSlice)
@@ -59,7 +61,11 @@ export function DialogHelpers({
           <DialogPrimitive.Close
             className={clsx(
               'focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none',
-              { 'right-32 top-32': noPadding, 'right-48 top-48 ': !noPadding },
+              {
+                'right-32 top-32': noPadding,
+                'right-48 top-48 ': !noPadding,
+                'text-white': isBgDark,
+              },
             )}
           >
             <X size={18} />

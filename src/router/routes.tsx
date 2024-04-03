@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { Homepage, MainLayout, NotFound } from './loadables'
+import { DetailPlayList, Homepage, MainLayout, NotFound } from './loadables'
 
 export const router = createBrowserRouter([
   {
@@ -9,6 +9,10 @@ export const router = createBrowserRouter([
       {
         path: '',
         element: <Homepage />,
+      },
+      {
+        path: 'detail',
+        element: <DetailPlayList />,
       },
     ],
   },
