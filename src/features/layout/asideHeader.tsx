@@ -14,7 +14,7 @@ export function AsideHeader({
   return (
     <div
       className={clsx('flex transition-all duration-300 hover:cursor-pointer', {
-        'flex-row items-center justify-between gap-x-32 phones:gap-x-16 phones:bg-dark-background phones:px-48 phones:py-32 phones:text-white phones:shadow-lg':
+        'flex-row items-center justify-between gap-x-32 phones:gap-x-16 phones:bg-dark-tint-2 phones:px-48 phones:py-32 phones:text-white phones:shadow-lg':
           show,
         'flex-col-reverse items-center gap-y-16': !show,
       })}

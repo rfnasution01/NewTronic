@@ -23,7 +23,7 @@ export default function Homepage() {
       ) : (
         <>
           {dataPlaylist?.map((item, idx) => (
-            <CardHelpers idx={idx} item={item} />
+            <CardHelpers idx={idx} item={item} isFetching={isFetching} />
           ))}
         </>
       )}
