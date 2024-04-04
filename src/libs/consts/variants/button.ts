@@ -15,7 +15,6 @@ const variants = {
     'text-black',
     'bg-white',
     'border',
-    'border-black',
     'hover:bg-neutral-100',
     'active:bg-neutral-100',
   ],
