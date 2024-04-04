@@ -6,9 +6,10 @@ import {
 } from '@/libs/helpers/formatText'
 import { getModeSlice } from '@/store/reducer/stateMode'
 import clsx from 'clsx'
-import { Globe } from 'lucide-react'
+import { Download, Globe } from 'lucide-react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
+import { saveAs } from 'file-saver'
 
 export function CardHelpers<
   T extends {
@@ -23,17 +24,23 @@ export function CardHelpers<
   item,
   isDetail,
   isFetching,
+  banner,
 }: {
   idx: number
   item: T
   isDetail?: boolean
   isFetching: boolean
+  banner?: string
 }) {
   const mode = useSelector(getModeSlice)
   const navigate = useNavigate()
 
   const handleClick = (title: string) => {
     navigate(`detail?id=${title}`)
+  }
+
+  const downloadImage = (image: any, type: any) => {
+    saveAs(image, type?.includes('video') ? 'playback.mp4' : 'image.jpg')
   }
 
   return (
@@ -69,7 +76,7 @@ export function CardHelpers<
             })}
           >
             <img
-              src={item?.banner ?? item?.url}
+              src={banner ?? item?.url}
               alt={item.title}
               className="h-auto w-full"
             />
@@ -105,18 +112,32 @@ export function CardHelpers<
             </>
           )}
         </div>
-        {!isDetail && (
+        <div className="flex items-center gap-x-24">
+          {!isDetail && (
+            <Button
+              variant="solid-general"
+              onClick={() => handleClick(convertToSlug(item?.title))}
+              disabled={isFetching}
+              classes="flex-1"
+            >
+              <span>
+                <Globe size={16} />
+              </span>
+              <span>DETAIL</span>
+            </Button>
+          )}
           <Button
             variant="light"
-            onClick={() => handleClick(convertToSlug(item?.title))}
+            onClick={() => downloadImage(banner ?? item?.url, item?.type)}
             disabled={isFetching}
+            classes="flex-1"
           >
             <span>
-              <Globe size={16} />
+              <Download size={16} />
             </span>
-            <span>DETAIL</span>
+            <span>Unduh</span>
           </Button>
-        )}
+        </div>
       </div>
     </Card>
   )
