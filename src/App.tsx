@@ -14,46 +14,53 @@ export default function MainLayout() {
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   return (
-    <section
-      id="RootLayout"
-      className={clsx(
-        'scrollbar relative flex max-h-screen min-h-screen max-w-full flex-col overflow-x-auto overflow-y-auto',
-        {
-          'bg-light-background text-black': mode.isLight,
-          'bg-dark-background text-white': !mode?.isLight,
-        },
-      )}
-    >
-      <div className="flex flex-1 flex-row">
-        <aside
-          className={clsx(
-            'sticky left-0 top-0 flex max-h-screen flex-col gap-y-64 p-32 text-white shadow phones:hidden',
-            { 'bg-dark-tint-2': mode.isLight, 'bg-dark-tint-1': !mode.isLight },
-          )}
-        >
-          <AsideHeader show={show} handleShow={() => setShow(!show)} />
-          <AsideContent show={show} />
-        </aside>
-
-        <article className="flex flex-1 flex-col gap-y-32">
-          <header className="hidden phones:block">
-            <AsideHeader show handleOpen={() => setIsOpen(true)} />
-          </header>
-          <div
+    <>
+      <section
+        id="RootLayout"
+        className={clsx(
+          'scrollbar relative flex max-h-screen min-h-screen max-w-full flex-col overflow-x-auto overflow-y-auto',
+          {
+            'bg-light-background text-black': mode.isLight,
+            'bg-dark-background text-white': !mode?.isLight,
+          },
+        )}
+      >
+        <div className="flex flex-1 flex-row">
+          <aside
             className={clsx(
-              'flex flex-row items-center justify-between px-48 py-16 shadow-md phones:hidden',
+              'sticky left-0 top-0 flex max-h-screen flex-col gap-y-64 p-32 text-white shadow phones:hidden',
               {
-                'bg-white': mode.isLight,
-                'bg-dark-tint-2': !mode?.isLight,
+                'bg-dark-tint-2': mode.isLight,
+                'bg-dark-tint-1': !mode.isLight,
               },
             )}
           >
-            <Breadcrumb />
-            <HeaderOptional />
-          </div>
-          <Outlet />
-        </article>
-      </div>
+            <AsideHeader show={show} handleShow={() => setShow(!show)} />
+            <AsideContent show={show} />
+          </aside>
+
+          <article className="flex flex-1 flex-col gap-y-32">
+            <header className="hidden phones:block">
+              <AsideHeader show handleOpen={() => setIsOpen(true)} />
+            </header>
+            <div
+              className={clsx(
+                'flex flex-row items-center justify-between px-48 py-16 shadow-md phones:hidden',
+                {
+                  'bg-white': mode.isLight,
+                  'bg-dark-tint-2': !mode?.isLight,
+                },
+              )}
+            >
+              <Breadcrumb />
+              <HeaderOptional />
+            </div>
+            <div className="scrollbar h-[calc(100vh_-_14rem)] overflow-y-auto">
+              <Outlet />
+            </div>
+          </article>
+        </div>
+      </section>
       <DialogHelpers
         title={
           <div className="flex items-center gap-x-8 px-48 py-32 shadow-md phones:bg-dark-background phones:text-white">
@@ -76,6 +83,6 @@ export default function MainLayout() {
           </div>
         }
       />
-    </section>
+    </>
   )
 }

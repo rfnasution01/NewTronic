@@ -114,9 +114,9 @@ export default {
           primary: '#1094DD',
         },
         dark: {
-          background: '#1f2937',
+          background: '#31363F',
           primary: '#60a5fa',
-          tint: { 1: '#334155', 2: '#181818' },
+          tint: { 1: '#222831', 2: '#222831' },
         },
       },
 
